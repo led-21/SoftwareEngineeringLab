@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SoftwareEngineeringLab.Api/SoftwareEngineeringLab.Api.csproj" />
+  <Project Path="SoftwareEngineeringLab.Core/SoftwareEngineeringLab.Core.csproj" />
+  <Project Path="SoftwareEngineeringLab.Tests/SoftwareEngineeringLab.Tests.csproj" />
+</Solution>
