@@ -55,8 +55,8 @@ export function App() {
           <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
             <span className="badge badge-blue">.NET 10</span>
             <span className="badge badge-indigo">React 19</span>
-            <span className="badge badge-emerald">TypeScript 5</span>
-            <span className="badge badge-amber">Vite</span>
+            <span className="badge badge-emerald">TypeScript 6</span>
+            <span className="badge badge-amber">Vite 8</span>
           </div>
         </div>
       </footer>

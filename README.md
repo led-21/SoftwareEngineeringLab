@@ -3,10 +3,10 @@
 > A collection of interactive software engineering studies covering algorithms, design patterns, SOLID principles and system design using C#, .NET, React and TypeScript.
 
 [![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
-[![React 19](https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript 5](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-Bundler-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tests](https://img.shields.io/badge/Tests-83%20Passing-brightgreen?logo=xunit)](https://xunit.net/)
+[![React 19](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript 6](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite 8](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![CI](https://github.com/led-21/SoftwareEngineeringLab/actions/workflows/ci.yml/badge.svg)](https://github.com/led-21/SoftwareEngineeringLab/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -110,14 +110,14 @@ The frontend functions both as a **connected client** communicating with the .NE
 
 ### Prerequisites
 - [.NET SDK 10.0+](https://dotnet.microsoft.com/download)
-- [Node.js 20+ & npm](https://nodejs.org/)
+- [Node.js 22+ & npm](https://nodejs.org/)
 
 ### 1. Run the Backend API
 ```bash
 cd backend/SoftwareEngineeringLab.Api
 dotnet run
 ```
-The API starts at `http://localhost:5000` (or `https://localhost:5001`).
+The API starts at `http://localhost:5000`.
 
 ### 2. Run the Frontend Playground
 In another terminal:

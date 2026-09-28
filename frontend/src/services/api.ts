@@ -57,11 +57,11 @@ export interface DesignPattern {
 }
 
 const CANDIDATE_HOSTS = [
-  'http://localhost:5067',
-  'http://127.0.0.1:5067',
-  '', // Relative /api via Vite proxy
   'http://localhost:5000',
   'http://127.0.0.1:5000',
+  '', // Relative /api via Vite proxy
+  'http://localhost:5067',
+  'http://127.0.0.1:5067',
 ];
 
 let activeApiHost: string | null = null;
@@ -95,7 +95,7 @@ export async function checkBackendHealth(): Promise<boolean> {
 }
 
 export function getApiEndpoint(path: string): string {
-  const host = activeApiHost ?? 'http://localhost:5067';
+  const host = activeApiHost ?? 'http://localhost:5000';
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${host}/api${cleanPath}`;
 }
