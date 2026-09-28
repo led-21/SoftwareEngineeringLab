@@ -56,22 +56,54 @@ export interface DesignPattern {
   whenToAvoid: string;
 }
 
-const API_BASE = 'http://localhost:5000/api';
+const CANDIDATE_HOSTS = [
+  'http://localhost:5067',
+  'http://127.0.0.1:5067',
+  '', // Relative /api via Vite proxy
+  'http://localhost:5000',
+  'http://127.0.0.1:5000',
+];
+
+let activeApiHost: string | null = null;
 
 // Helper to check if backend is alive
 export async function checkBackendHealth(): Promise<boolean> {
-  try {
-    const res = await fetch('http://localhost:5000/', { signal: AbortSignal.timeout(1000) });
-    return res.ok;
-  } catch {
-    return false;
+  if (activeApiHost !== null) {
+    try {
+      const probeUrl = activeApiHost === '' ? '/api/solid' : `${activeApiHost}/`;
+      const res = await fetch(probeUrl, { signal: AbortSignal.timeout(800) });
+      if (res.ok) return true;
+    } catch {
+      activeApiHost = null;
+    }
   }
+
+  for (const host of CANDIDATE_HOSTS) {
+    try {
+      const probeUrl = host === '' ? '/api/solid' : `${host}/`;
+      const res = await fetch(probeUrl, { signal: AbortSignal.timeout(800) });
+      if (res.ok) {
+        activeApiHost = host;
+        return true;
+      }
+    } catch {
+      // try next candidate
+    }
+  }
+
+  return false;
+}
+
+export function getApiEndpoint(path: string): string {
+  const host = activeApiHost ?? 'http://localhost:5067';
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${host}/api${cleanPath}`;
 }
 
 // 1. Binary Search
 export async function executeBinarySearch(nums: number[], target: number): Promise<BinarySearchResponse> {
   try {
-    const res = await fetch(`${API_BASE}/algorithms/binary-search`, {
+    const res = await fetch(getApiEndpoint('/algorithms/binary-search'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nums, target }),
@@ -152,7 +184,7 @@ export async function executeBinarySearch(nums: number[], target: number): Promi
 // 2. Sorting
 export async function executeSort(nums: number[], algorithm: string): Promise<SortResponse> {
   try {
-    const res = await fetch(`${API_BASE}/algorithms/sort`, {
+    const res = await fetch(getApiEndpoint('/algorithms/sort'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nums, algorithm }),
@@ -179,7 +211,7 @@ let clientLastRefill = Date.now();
 
 export async function consumeRateLimitToken(): Promise<RateLimitResponse> {
   try {
-    const res = await fetch(`${API_BASE}/system-design/rate-limiter/consume`, {
+    const res = await fetch(getApiEndpoint('/system-design/rate-limiter/consume'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tokens: 1 }),
@@ -219,7 +251,7 @@ const localCodeMap = new Map<string, string>();
 
 export async function shortenUrl(url: string): Promise<{ shortCode: string; shortUrl: string }> {
   try {
-    const res = await fetch(`${API_BASE}/system-design/url-shortener/shorten`, {
+    const res = await fetch(getApiEndpoint('/system-design/url-shortener/shorten'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url }),
@@ -244,7 +276,7 @@ export async function shortenUrl(url: string): Promise<{ shortCode: string; shor
 // 5. SOLID Catalog
 export async function fetchSolidPrinciples(): Promise<SolidPrinciple[]> {
   try {
-    const res = await fetch(`${API_BASE}/solid`, { signal: AbortSignal.timeout(2000) });
+    const res = await fetch(getApiEndpoint('/solid'), { signal: AbortSignal.timeout(2000) });
     if (res.ok) return await res.json();
   } catch {
     // Fallback to static principles definition
@@ -302,7 +334,7 @@ export async function fetchSolidPrinciples(): Promise<SolidPrinciple[]> {
 // 6. Design Patterns Catalog
 export async function fetchDesignPatterns(): Promise<DesignPattern[]> {
   try {
-    const res = await fetch(`${API_BASE}/design-patterns`, { signal: AbortSignal.timeout(2000) });
+    const res = await fetch(getApiEndpoint('/design-patterns'), { signal: AbortSignal.timeout(2000) });
     if (res.ok) return await res.json();
   } catch {
     // Fallback
