@@ -31,3 +31,9 @@ x86/
 # OS Files
 [Tt]humbs.db
 *.DS_Store
+
+# Frontend
+node_modules/
+dist/
+.vite/
+
