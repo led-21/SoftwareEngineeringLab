@@ -1,162 +1,160 @@
 # Software Engineering Lab
 
-> A collection of interactive software engineering studies covering algorithms, design patterns, SOLID principles and system design using C#, .NET, React and TypeScript.
+> An interactive software engineering playground built with .NET, React and TypeScript to explore algorithms, design patterns, SOLID principles and system design concepts.
 
 [![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
 [![React 19](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript 6](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite 8](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![CI](https://github.com/led-21/SoftwareEngineeringLab/actions/workflows/ci.yml/badge.svg)](https://github.com/led-21/SoftwareEngineeringLab/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/Tests-83%20passing-10b981)](backend/SoftwareEngineeringLab.Tests)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
----
+![Software Engineering Lab](docs/images/overview.png)
 
 ## Overview
 
-**SoftwareEngineeringLab** is an educational, non-commercial public technical laboratory designed to explore, benchmark, and visualize foundational software engineering concepts. 
+This repository is a hands-on engineering playground focused on implementing, testing, and visualizing core software engineering concepts. It brings together algorithmic fundamentals, object-oriented design principles, reusable design patterns, and system design building blocks in a modular C# / .NET 10 backend paired with a React and TypeScript interface.
 
-Rather than disguising trivial code behind complex enterprise layers, this laboratory prioritizes **code clarity**, **pedagogical trade-off analysis**, **mathematical algorithmic rigor**, and **interactive visual learning**.
+Each module is structured as clean, isolated domain logic backed by automated xUnit tests and exposed through an ASP.NET Core Minimal API, enabling step-by-step execution tracing and real-time state inspection in the browser.
 
----
+## Why This Project
 
-## Topics
+- **Implementation beyond theory** — translates classic algorithms and architectural concepts into working, strongly typed C# and TypeScript code.
+- **Interactive execution tracing** — connects backend execution steps to visual pointer states, caches, hash rings, and traffic simulators.
+- **Explicit architectural trade-offs** — pairs SOLID principles and GoF patterns with side-by-side anti-pattern refactors, UML diagrams, and applicability guidelines.
+- **Testable and isolated design** — keeps core implementations free of framework coupling and verified by unit tests.
+- **Full-stack integration** — combines a .NET 10 Minimal API with a resilient React playground that supports both live API execution and client-side simulation.
 
-### 1. Data Structures & Algorithms (DSA)
-- **Arrays**: Two Sum, Kadane's Algorithm ($O(n)$ Max Subarray), Stock Profit, In-place Array Rotation, Contains Duplicate, Product Except Self.
-- **Searching**: Binary Search with real-time pointer tracing ($L, \text{MID}, R$), Rotated Array Search, Range Searching.
-- **Sorting**: QuickSort (Lomuto partitioning), MergeSort (Divide & Conquer), HeapSort (In-place binary heap).
-- **Linked Lists**: Single linked list reversal, Two sorted lists merge, Cycle detection (Floyd's Tortoise & Hare), $N$-th node removal from end.
-- **Trees**: Binary Tree Maximum Depth, IsSameTree structural identity, Invert Tree, Inorder Traversal, BST Invariant Validation, Lowest Common Ancestor.
-- **Dynamic Programming**: Space-optimized Fibonacci, Climbing Stairs combinations, House Robber ($O(1)$ space), Coin Change, Longest Increasing Subsequence (LIS).
-- **Graphs**: Depth-First Search (DFS), Breadth-First Search (BFS), Number of Islands (2D Grid connected components), Course Schedule (Kahn's Topological Sort).
-- **Strings**: Palindrome validation, Anagram frequency checking, Sliding Window Longest Substring, Group Anagrams.
-- **Custom Data Structures**: `CustomStack<T>` (LIFO) and `CustomQueue<T>` (FIFO).
+## Engineering Areas
 
-### 2. SOLID Principles
-Detailed side-by-side analysis of anti-patterns vs refactored implementations:
-- **S — Single Responsibility Principle (SRP)**: Segregating user domain persistence from notification dispatching.
-- **O — Open-Closed Principle (OCP)**: Polymorphic shape computation vs modifying legacy conditional calculators.
-- **L — Liskov Substitution Principle (LSP)**: Solving the classic Rectangle-Square invariant violation.
-- **I — Interface Segregation Principle (ISP)**: Lean role interfaces (`IWorkable`, `IEatable`) vs bloated fat interfaces.
-- **D — Dependency Inversion Principle (DIP)**: Abstract messaging contracts (`IMessageSender`) injected via constructor vs tight coupling to concrete SMTP clients.
+| Area | Modules & Topics | Reference |
+| :--- | :--- | :--- |
+| **Algorithms & Data Structures** | Arrays, Search, Sorting, Linked Lists, Trees, Graphs, Dynamic Programming, Strings, Stack / Queue | [docs/algorithms.md](docs/algorithms.md) |
+| **SOLID Principles** | Single Responsibility (SRP), Open-Closed (OCP), Liskov Substitution (LSP), Interface Segregation (ISP), Dependency Inversion (DIP) | [docs/solid-principles.md](docs/solid-principles.md) |
+| **Design Patterns** | **Creational** (Singleton, Factory Method, Builder), **Structural** (Adapter, Decorator, Facade), **Behavioral** (Observer, Strategy, Command) | [docs/design-patterns.md](docs/design-patterns.md) |
+| **System Design** | Token Bucket Rate Limiter, Base62 URL Shortener, LRU Cache, Consistent Hashing, Round Robin Load Balancer, Async Chat Queue Broker | [docs/system-design.md](docs/system-design.md) |
 
-### 3. Design Patterns
-Comprehensive patterns documented with problem statements, Mermaid diagrams, clean C# implementations, and practical trade-offs:
-- **Creational**: Singleton (canonical thread-safe `Lazy<T>`), Factory Method (Payment Provider routing), Builder (Fluent multi-step configuration).
-- **Structural**: Adapter (Bridging legacy XML to modern JSON), Decorator (Transparent in-memory caching), Facade (Subsystem order fulfillment coordinator).
-- **Behavioral**: Observer (Reactive pub/sub stock price ticker), Strategy (Interchangeable pricing algorithms), Command (Transactional command execution with Undo history).
+## Application Preview
 
-### 4. System Design Studies
-Independent architectural building block studies:
-- **Rate Limiter**: Token Bucket algorithm with sub-millisecond fractional time tracking (preventing token starvation).
-- **URL Shortener**: Base62 encoding of cryptographic hashes with automated collision resolution.
-- **LRU Cache**: $O(1)$ access and eviction using a Doubly Linked List combined with a Hash Map.
-- **Consistent Hashing**: Uniform ring partitioning using FNV-1a 32-bit hashing and $O(\log n)$ binary search clockwise routing.
-- **Round Robin Load Balancer**: Dynamic pool management and sequential round-robin traffic dispatch.
-- **Chat Queue Broker**: Concurrent user inboxes with asynchronous long-polling awaiting (`TaskCompletionSource`).
+### Algorithm Visualization
 
-### 5. Frontend Experiments
-- Interactive engineering playground built with React, TypeScript, and Vite.
-- Real-time step-by-step Binary Search visualization with active pointer badges.
-- Sorting bar graph showing comparisons and swaps in real time.
-- Interactive Stack & Queue container with push/pop/enqueue/dequeue controls.
-- Dynamic 2D grid toggle for the Number of Islands DFS algorithm.
-- Interactive Token Bucket rate-limiter simulator with live token refill gauge and burst testing.
-- Visual SVG circular Consistent Hash Ring with dynamic key mapping.
+![Algorithm Visualizer](docs/images/algorithm-visualizer.png)
 
----
+Real-time sorting bar visualizer and step-by-step binary search pointer tracing with asymptotic time and space complexity indicators.
+
+### System Design Playground
+
+![System Design Playground](docs/images/system-design.png)
+
+Interactive system design simulations featuring an SVG Consistent Hash Ring, Token Bucket rate limiting, LRU cache eviction, and Mermaid topology diagrams.
+
+### Data Structures Playground
+
+![Data Structures Playground](docs/images/data-structures.png)
+
+Interactive LIFO Stack and FIFO Queue visualizers with real-time push, pop, enqueue, and dequeue state updates.
 
 ## Architecture
 
-```text
-SoftwareEngineeringLab/
-├── backend/
-│   ├── SoftwareEngineeringLab.slnx          # Solution file
-│   ├── SoftwareEngineeringLab.Core/         # Algorithmic engine & design patterns
-│   │   ├── Algorithms/                      # Arrays, Sorting, Searching, Graphs, DP, Trees, Strings
-│   │   ├── DataStructures/                  # Stack, Queue, LRU Cache
-│   │   ├── Solid/                           # SRP, OCP, LSP, ISP, DIP
-│   │   ├── DesignPatterns/                  # Creational, Structural, Behavioral
-│   │   └── SystemDesign/                    # RateLimiter, UrlShortener, LoadBalancer, ConsistentHash
-│   ├── SoftwareEngineeringLab.Api/          # Minimal API endpoints with CORS
-│   └── SoftwareEngineeringLab.Tests/        # 83 xUnit automated tests
-│
-├── frontend/                                # Engineering Playground (React + TypeScript + Vite)
-│   ├── src/
-│   │   ├── components/                      # Header, CodeBlock, MermaidViewer, ComplexityBadge
-│   │   ├── pages/                           # AlgorithmsPage, SolidPage, PatternsPage, SystemDesignPage
-│   │   └── services/                        # api.ts (backend client + local fallback simulator)
-│   ├── package.json
-│   └── vite.config.ts
-│
-├── docs/                                    # Technical deep dives and study guides
-└── README.md
+```mermaid
+flowchart TD
+    UI["React 19 + TypeScript Playground"] -- "HTTP / JSON" --> API["ASP.NET Core Minimal API"]
+    API --> Core["SoftwareEngineeringLab.Core"]
+    Core --> Alg["Algorithms & Data Structures"]
+    Core --> Pat["SOLID & Design Patterns"]
+    Core --> Sys["System Design Building Blocks"]
+    Alg & Pat & Sys --> Tests["xUnit Test Suite (83 Tests)"]
 ```
 
----
+- **`SoftwareEngineeringLab.Core`** contains pure C# implementations with zero web or infrastructure dependencies.
+- **`SoftwareEngineeringLab.Api`** exposes interactive endpoints for algorithm execution, pattern catalogs, and system design simulations.
+- **`frontend`** renders step-by-step visualizers, code comparisons, and Mermaid diagrams.
+- **`SoftwareEngineeringLab.Tests`** validates algorithmic invariants, edge cases, and system design state transitions.
+- **GitHub Actions CI** builds and verifies both backend and frontend pipelines on every push and pull request.
 
-## Interactive Demo
+### Tech Stack
 
-The frontend functions both as a **connected client** communicating with the .NET 10 API and as an **offline simulator** (using native TypeScript fallback algorithms):
+| Area | Technology |
+| :--- | :--- |
+| **Core / Backend** | C# / .NET 10 |
+| **API** | ASP.NET Core Minimal API |
+| **Frontend** | React 19 + TypeScript 6 |
+| **Build** | Vite 8 |
+| **Backend Tests** | xUnit |
+| **CI** | GitHub Actions |
 
-1. **Input**: Provide parameters or interact with intuitive controls (buttons, grids, sliders).
-2. **Execution**: Step through or trigger algorithmic passes.
-3. **Output**: Observe instant state changes, logs, or graphical updates.
-4. **Complexity**: Review verified asymptotic time and space guarantees (e.g. $\text{Time: } O(\log n), \text{Space: } O(1)$).
+## Featured Implementations
 
----
+- **Binary Search Visualizer** — Step-by-step search space partitioning with active `L`, `MID`, and `R` pointer tracing.
+- **Sorting Visualizer** — Proportional bar comparisons and swaps covering QuickSort (Lomuto), MergeSort, and HeapSort.
+- **Token Bucket Rate Limiter** — Sub-second fractional token refill with burst handling and HTTP 200 / 429 simulation.
+- **Consistent Hashing** — FNV-1a 32-bit hash ring with virtual node replicas and $O(\log n)$ binary search clockwise routing.
+- **LRU Cache** — Thread-safe $O(1)$ lookup and eviction combining a hash map with a doubly linked list.
+- **Command Pattern with Undo** — Encapsulated document mutations with stack-based rollback history.
+- **Graph Traversal** — Depth-first and breadth-first search, 2D grid island counting, and Kahn's topological sort.
 
-## Running Locally
+## Engineering Details
 
-### Prerequisites
-- [.NET SDK 10.0+](https://dotnet.microsoft.com/download)
-- [Node.js 22+ & npm](https://nodejs.org/)
+- **Generic data structures**: Type-safe `CustomStack<T>`, `CustomQueue<T>`, and `LruCache<TKey, TValue>` implementations.
+- **Algorithmic complexity awareness**: Implementations designed around explicit time and space bounds ($O(1)$ LRU operations, $O(\log n)$ ring lookup, $O(1)$-space DP optimizations).
+- **Asynchronous coordination**: In-memory message broker (`ChatQueueService`) using `ConcurrentDictionary`, `ConcurrentQueue`, and `TaskCompletionSource` for non-blocking long-polling.
+- **Resilient frontend client**: Automatic backend health probing with seamless local TypeScript fallback simulation when running offline.
+- **Strict TypeScript**: Configured with `strict`, `noUnusedLocals`, `noUnusedParameters`, and `noFallthroughCasesInSwitch`.
 
-### 1. Run the Backend API
-```bash
-cd backend/SoftwareEngineeringLab.Api
-dotnet run
-```
-The API starts at `http://localhost:5000`.
+## Testing & CI
 
-### 2. Run the Frontend Playground
-In another terminal:
-```bash
-cd frontend
-npm install
-npm run dev
-```
-Open your browser at `http://localhost:5173`.
+### Automated Tests
 
----
-
-## Tests
-
-Execute the automated test suite across all algorithms and components:
+Run the xUnit test suite from the `backend` directory:
 
 ```bash
 cd backend
 dotnet test SoftwareEngineeringLab.slnx
 ```
 
-Output:
-```text
-Aprovado!  – Com falha: 0, Aprovado: 83, Ignorado: 0, Total: 83 - SoftwareEngineeringLab.Tests.dll (net10.0)
+All 83 automated unit tests passing across algorithms, data structures, design patterns, and system design modules.
+
+### Continuous Integration
+
+[![CI](https://github.com/led-21/SoftwareEngineeringLab/actions/workflows/ci.yml/badge.svg)](https://github.com/led-21/SoftwareEngineeringLab/actions/workflows/ci.yml)
+
+GitHub Actions automatically validates pushes and pull requests to `main` across two parallel jobs: restoring, building, and testing the .NET 10 solution in `Release` mode, and running `npm ci` followed by `tsc && vite build` for the React + TypeScript frontend.
+
+## Run Locally
+
+**Backend API** (`http://localhost:5000`):
+
+```bash
+cd backend/SoftwareEngineeringLab.Api
+dotnet run
 ```
 
----
+**Frontend Playground** (`http://localhost:5173`):
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Project Structure
+
+```text
+backend/
+  SoftwareEngineeringLab.Core/
+  SoftwareEngineeringLab.Api/
+  SoftwareEngineeringLab.Tests/
+frontend/
+docs/
+.github/workflows/
+```
 
 ## Roadmap
 
-- [x] Complete refactoring of legacy code into clean .NET 10 modular libraries.
-- [x] Comprehensive xUnit test suite (83 unit tests covering DSA and System Design).
-- [x] Minimal API with CORS support.
-- [x] Interactive React + TypeScript + Vite playground with dark mode and Mermaid diagrams.
-- [ ] Add Trie (Prefix Tree) interactive autocomplete visualizer.
-- [ ] Add Dijkstra / A* Pathfinding interactive grid.
-- [ ] Add Distributed Lock (Redlock concept) educational simulation.
-
----
+- Trie (Prefix Tree) autocomplete visualization
+- Dijkstra / A* pathfinding grid visualization
+- Distributed lock simulation
+- Additional system design scenarios
 
 ## License
 
